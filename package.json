@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "app": "nodemon app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "build": "babel src -d dist"
   },
   "repository": {
     "type": "git",
