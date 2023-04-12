@@ -68,7 +68,7 @@ router.post('/register', async (req, res) => {
     const user = await User.findOne({ email });
 
     // Generate JWT token
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ userId: user.id }, "IDONOTKNOW");
 
     // create cart
     const cart = new Cart({ user: user.id, items: [], total: 0 });
@@ -121,7 +121,7 @@ router.get('/cart/:id', async (req, res) => {
 
 router.post('/addToCart', async (req, res) => {
   try {
-    const { userId, itemName, itemDescription, itemPrice } = req.body;
+    const { userId, itemName, itemId, itemDescription, itemPrice } = req.body;
 
     let cart = await Cart.findOne({user: userId});
 
@@ -136,6 +136,7 @@ router.post('/addToCart', async (req, res) => {
     } else {
       cart.items.push({
         name: itemName,
+        product_id: itemId,
         description: itemDescription,
         price: itemPrice,
         quantity: 1,
